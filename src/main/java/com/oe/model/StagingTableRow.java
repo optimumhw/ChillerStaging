@@ -16,6 +16,16 @@ public class StagingTableRow {
         
     }
     
+    public int getStage(){
+        return this.stage;
+    }
     
+    public int getRank(){
+        return this.rank;
+    }
+    
+    public List<Boolean> getFlags(){
+        return flags;
+    }
     
 }

@@ -34,11 +34,13 @@ public class StagingTableComparator implements Comparator<Integer> {
         if( getStage(A) < getStage(B) ) return AWINS; //A should be higher in the list since it has smaller stage
         if( getStage(A) > getStage(B) ) return BWINS;  //B wins
         
+        Integer stagingOrder[] = new Integer[]{1};
+        
         //when both are of the same stage, look at which chillers are on.
         //the guy with the first more efficient chiller should be higher in the table.
-        for( int i=0; i< this.stagingOrder.length; i++ ){
+        for( int i=0; i< stagingOrder.length; i++ ){
             
-            int nextBestChiller = 1 << (this.stagingOrder.length - stagingOrder[i]);
+            int nextBestChiller = 1 << (stagingOrder.length - stagingOrder[i]);
             
             if( (A & B & nextBestChiller) > 0 ) continue; //they both have this chiller
             
