@@ -25,19 +25,22 @@ public class StagingTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int col) {
         if( col == 0){
+            return EnumStagingTableColumns.Cap.getFriendlyName();
+        }
+        else if( col == 1){
             return EnumStagingTableColumns.Stage.getFriendlyName();
         }
-        else if(col == 1 ){
+        else if(col == 2 ){
             return EnumStagingTableColumns.Rank.getFriendlyName();
         }
         else {
-            return stagingTable.getChillerInfos().get(col-2).getName();
+            return stagingTable.getChillerInfos().get(col-3).getName();
         }
     }
 
     @Override
     public int getColumnCount() {
-        return stagingTable.getChillerInfos().size() + 2;
+        return stagingTable.getChillerInfos().size() + 3;
     }
 
     @Override
@@ -47,14 +50,19 @@ public class StagingTableModel extends AbstractTableModel {
         
         StagingTableRow row = stagingTable.getRows().get(rowIndex);
 
-        if( columnIndex == 0 ){
-           row.getStage();
-        }
-        else if ( columnIndex == 1 ){
-          row.getRank();
-        }
-        else{
-          val = row.getFlags().get(columnIndex-2);
+        switch (columnIndex) {
+            case 0:
+                val = row.getCapacity();
+                break;
+            case 1:
+                val = row.getStage();
+                break;
+            case 2:
+                val =row.getRank();
+                break;
+            default:
+                val = row.getFlags().get(columnIndex-3);
+                break;
         }
 
         return val;

@@ -7,8 +7,9 @@ import java.util.List;
 
 public enum EnumStagingTableColumns {
 
-    Stage(0,"Stage", 20),
-    Rank(1,"Rank", 20);
+    Cap(0,"Cap", 20),
+    Stage(1,"Stage", 20),
+    Rank(2,"Rank", 20);
 
     private final String friendlyName;
     private final int columnNumber;

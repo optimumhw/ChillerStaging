@@ -44,6 +44,7 @@ public class Controller implements java.awt.event.ActionListener, PropertyChange
         model.initModel();
         
         view.fillChillerTable( getChillerInfos() );
+        view.fillStagingTable( model.getStagingTable() );
     }
     
     public List<ChillerInfo> getChillerInfos(){

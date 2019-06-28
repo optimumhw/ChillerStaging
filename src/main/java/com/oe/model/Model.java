@@ -3,7 +3,9 @@ package com.oe.model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,16 +16,26 @@ public class Model extends java.util.Observable {
     static Logger logger = LoggerFactory.getLogger(Model.class.getName());
 
     private final List<ChillerInfo> chillerInfos;
+    private final Map<Integer, ChillerInfo> chillerNumToInfoMap;
+    private final StagingTable stagingTable;
 
     public Model() {
         this.chillerInfos = new ArrayList<>();
 
-        chillerInfos.add(new ChillerInfo("A", 2500, 1.0));
-        chillerInfos.add(new ChillerInfo("B", 2500, 2.0));
+        chillerInfos.add(new ChillerInfo("A", 2400, 1.0));
+        chillerInfos.add(new ChillerInfo("B", 2400, 2.0));
         chillerInfos.add(new ChillerInfo("C", 1200, 1.0));
         chillerInfos.add(new ChillerInfo("D", 1200, 2.0));
         chillerInfos.add(new ChillerInfo("E", 1200, 3.0));
 
+        chillerNumToInfoMap = new HashMap<>();
+
+        int chillerNumber = 1;
+        for (ChillerInfo ci : chillerInfos) {
+            chillerNumToInfoMap.put(chillerNumber++, ci);
+        }
+
+        stagingTable = new StagingTable(chillerInfos, chillerNumToInfoMap);
     }
 
     public void addPropChangeListener(PropertyChangeListener listener) {
@@ -33,17 +45,18 @@ public class Model extends java.util.Observable {
     public void removePropChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
-    
+
     public void initModel() {
 
     }
-    
-    public List<ChillerInfo> getChillerInfos(){
+
+    public List<ChillerInfo> getChillerInfos() {
         return chillerInfos;
     }
-    
-    
-   
+
+    public StagingTable getStagingTable() {
+        return stagingTable;
+    }
 
     /*
     public void doSomething() {
