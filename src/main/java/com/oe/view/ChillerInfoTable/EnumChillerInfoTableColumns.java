@@ -7,9 +7,9 @@ import java.util.List;
 
 public enum EnumChillerInfoTableColumns {
 
-    ShortName(0,"Name", 100),
-    Size(1,"Size", 50),
-    Eff(2,"Eff", 50);
+    ChillerName(0,"Name", 100),
+    ChillerNumber(1, "Number", 100),
+    Ranking(2,"Ranking", 50);
 
     private final int columnNumber;
     private final String columnName;

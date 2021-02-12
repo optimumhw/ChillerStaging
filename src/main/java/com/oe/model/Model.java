@@ -14,28 +14,64 @@ public class Model extends java.util.Observable {
     final private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     static Logger logger = LoggerFactory.getLogger(Model.class.getName());
+    
+    private ChillerInfos chillerInfos;
 
-    private final List<ChillerInfo> chillerInfos;
-    private final Map<Integer, ChillerInfo> chillerNumToInfoMap;
-    private final StagingTable stagingTable;
+    
+
+    StagingTable stagingTable;
+
 
     public Model() {
-        this.chillerInfos = new ArrayList<>();
+        
+        List<ChillerInfo> chillerInfoList = new ArrayList<>();
+        
+        //CH	RankA		CH	RankB
+        //CH1	1		CH1	3
+        //CH2	3		CH2	1
+        //CH3	9		CH3	9
+        //CH4	10		CH4	10
+        //CH5	7		CH5	7
+        //CH6	8		CH6	8
+        //CH7	2		CH7	2
+        //CH8	6		CH8	6
+        //CH9	4		CH9	5
+        //CH10	5		CH10	4
+//
+//        chillerInfoList.add(new ChillerInfo("CH1", 1, 1));
+//        chillerInfoList.add(new ChillerInfo("CH2", 2, 3));
+//        chillerInfoList.add(new ChillerInfo("CH3", 3, 9));
+//        chillerInfoList.add(new ChillerInfo("CH4", 4, 10));
+//        chillerInfoList.add(new ChillerInfo("CH5", 5, 7));
+//        chillerInfoList.add(new ChillerInfo("CH6", 6, 8));
+//        chillerInfoList.add(new ChillerInfo("CH7", 7, 2));
+//        chillerInfoList.add(new ChillerInfo("CH8", 8, 6));
+//        chillerInfoList.add(new ChillerInfo("CH9", 9, 4));
+//        chillerInfoList.add(new ChillerInfo("CH10", 10, 5));
+//           
+        chillerInfoList.add(new ChillerInfo("CH1", 1, 3));
+        chillerInfoList.add(new ChillerInfo("CH2", 2, 1));
+        chillerInfoList.add(new ChillerInfo("CH3", 3, 9));
+        chillerInfoList.add(new ChillerInfo("CH4", 4, 10));
+        chillerInfoList.add(new ChillerInfo("CH5", 5, 7));
+        chillerInfoList.add(new ChillerInfo("CH6", 6, 8));
+        chillerInfoList.add(new ChillerInfo("CH7", 7, 2));
+        chillerInfoList.add(new ChillerInfo("CH8", 8, 6));
+        chillerInfoList.add(new ChillerInfo("CH9", 9, 5));
+        chillerInfoList.add(new ChillerInfo("CH10", 10, 4));
+////        
 
-        chillerInfos.add(new ChillerInfo("A", 2400, 1.0));
-        chillerInfos.add(new ChillerInfo("B", 2400, 2.0));
-        chillerInfos.add(new ChillerInfo("C", 1200, 1.0));
-        chillerInfos.add(new ChillerInfo("D", 1200, 2.0));
-        chillerInfos.add(new ChillerInfo("E", 1200, 3.0));
 
-        chillerNumToInfoMap = new HashMap<>();
+//        chillerInfoList.add(new ChillerInfo("A", 1, 2));
+//        chillerInfoList.add(new ChillerInfo("B", 2, 3));
+//        chillerInfoList.add(new ChillerInfo("C", 3, 1));
 
-        int chillerNumber = 1;
-        for (ChillerInfo ci : chillerInfos) {
-            chillerNumToInfoMap.put(chillerNumber++, ci);
-        }
 
-        stagingTable = new StagingTable(chillerInfos, chillerNumToInfoMap);
+
+        chillerInfos = new ChillerInfos(chillerInfoList);
+        
+        
+        stagingTable = new StagingTable(chillerInfos);
     }
 
     public void addPropChangeListener(PropertyChangeListener listener) {
@@ -51,46 +87,16 @@ public class Model extends java.util.Observable {
     }
 
     public List<ChillerInfo> getChillerInfos() {
-        return chillerInfos;
+        return chillerInfos.getChillerInfoList();
+    }
+    
+    public Integer[] getStageOrder(){
+        return chillerInfos.getStagingOrder();
     }
 
     public StagingTable getStagingTable() {
         return stagingTable;
     }
 
-    /*
-    public void doSomething() {
 
-        SwingWorker worker = new SwingWorker< OEResponse, Void>() {
-
-            @Override
-            public OEResponse doInBackground() throws IOException {
-                OEResponse results = stationClient.getStations();
-                return results;
-            }
-
-            @Override
-            public void done() {
-                try {
-                    OEResponse resp = get();
-
-                    if (resp.responseCode == 200) {
-                        List<StationInfo> stations = (List<StationInfo>) resp.responseObject;
-
-                        pcs.firePropertyChange(PropertyChangeNames.StationsListReturned.getName(), null, stations);
-                    } else {
-                        pcs.firePropertyChange(PropertyChangeNames.ErrorResponse.getName(), null, resp);
-                    }
-                    pcs.firePropertyChange(PropertyChangeNames.RequestResponseChanged.getName(), null, getRRS());
-
-                } catch (Exception ex) {
-                    Logger logger = LoggerFactory.getLogger(this.getClass().getName());
-                    logger.error(this.getClass().getName(), ex);
-                }
-            }
-        };
-        worker.execute();
-    }
-
-     */
 }

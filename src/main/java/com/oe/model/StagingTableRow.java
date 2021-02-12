@@ -5,14 +5,13 @@ import java.util.List;
 
 public class StagingTableRow {
 
-    int capacity;
     int stage;
     int rank;
     List<Integer> flags;
 
-    StagingTableRow(int numChillers, int capacity, int stage, int rank, int compressed) {
+    StagingTableRow(int numChillers, int stage, int rank, int compressed) {
 
-        this.capacity = capacity;
+
         this.stage = stage;
         this.rank = rank;
 
@@ -25,9 +24,6 @@ public class StagingTableRow {
 
     }
     
-    public int getCapacity(){
-        return this.capacity;
-    }
 
     public int getStage() {
         return this.stage;

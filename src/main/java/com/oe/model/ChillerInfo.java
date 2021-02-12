@@ -4,25 +4,26 @@ package com.oe.model;
 
 public class ChillerInfo {
     private final String name;
-    private final int size;
-    private final double eff;
+    private final int chillerNumber;
+    private final int chillerRanking;
     
-    public ChillerInfo( String name, int size, double eff){
+    public ChillerInfo( String name, int chillerNumber, int chillerRanking){
         this.name = name;
-        this.size = size;
-        this.eff = eff;
+        this.chillerNumber = chillerNumber;
+        this.chillerRanking = chillerRanking;
     }
     
     public String getName(){
         return name;
     }
     
-    public int getSize(){
-        return size;
+    public int getChillerNumber(){
+        return chillerNumber;
     }
     
-    public double getEff(){
-        return eff;
+    public int getChillerRanking(){
+        return chillerRanking;
     }
+    
           
 }

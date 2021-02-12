@@ -46,14 +46,14 @@ public class ChillerInfoTableModel extends AbstractTableModel {
         ChillerInfo chillerInfo = chillerInfos.get(rowIndex);
 
         switch (enumCol) {
-            case ShortName:
+            case ChillerName:
                 val = chillerInfo.getName();
                 break;
-            case Size:
-                val = chillerInfo.getSize();
+            case ChillerNumber:
+                val = chillerInfo.getChillerNumber();
                 break;
-            case Eff:
-                val = chillerInfo.getEff();
+            case Ranking:
+                val = chillerInfo.getChillerRanking();
                 break;
  
         }
